@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "A:\\GithubProject\\The-IOT-System-based-on-MQTT-V3.0\\MQTTAPP\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-watch-v21\\values-watch-v21.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\- -\\.gradle\\caches\\transforms-2\\files-2.1\\cb99e77638f7aea73fdfbb0798f74a2b\\appcompat-1.1.0\\res\\values-watch-v21\\values-watch-v21.xml",
+                    "from": {
+                        "startLines": "2,6,10",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,271,499",
+                        "endLines": "5,9,13",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "266,494,724"
+                    }
+                }
+            ]
+        }
+    ]
+}
