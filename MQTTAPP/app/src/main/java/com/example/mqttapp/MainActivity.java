@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private String serverUri = "tcp://152.136.110.145:1883";    //这里可以填上各种云平台的物联网云平的域名+1883端口号，什么阿里云腾讯云百度云天工物接入都可以，
                                 // 注意：前缀“tcp：//”不可少
     private String userName = "root";                           //然后是你的用户名，阿里云腾讯云百度云天工物接入这些平台你新建设备后就自动生成了
-    private String passWord = "Zzj123456";                      //用户名对应的密码，同样各种云平台都会对应生成密码
+    private String passWord = "passWord";                      //用户名对应的密码，同样各种云平台都会对应生成密码
     private String clientId = "app"+System.currentTimeMillis(); //clientId很重要，不能重复，否则就会连不上，所以我定义成 app+当前时间
     private String mqtt_sub_topic = "test";                     //需要订阅的主题
     //private String mqtt_pub_topic = "test";                   //需要发布的主题
@@ -42,11 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
     private Button Connect;
     private Button Publish;
-//    private Button subscribe;
+    private Button subscribe;
 
     private EditText PubMessage;
     private EditText PubTopic;
-//    private EditText SubTopic;
+    private EditText SubTopic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 //        SubTopic=(EditText)findViewById(R.id.SubscribeTopicEditText);
 //        subscribe=(Button)findViewById(R.id.SubscribeTopicButton);
     }
-    /*链接按钮触发*/
+    /*连接按钮触发*/
     public void ConnectionButtonClick(View v)
     {
         mqtt_init_Connect();
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         if(IsConnect)
         {
             publishMessage(PubTopic.getText().toString(),PubMessage.getText().toString());
-            makeToast("publishMessage Success");
+            makeToast("PublishMessageButtonClick");
         }
         else
         {
@@ -128,10 +128,6 @@ public class MainActivity extends AppCompatActivity {
             //设置是否清空session,设置为false表示服务器会保留客户端的连接记录，设置为true表示每次连接到服务器都以新的身份连接
             options.setCleanSession(true);
 
-            MqttTopic topic = mqtt_client.getTopic(mqtt_sub_topic);
-            //setWill方法，如果项目中需要知道客户端是否掉线可以调用该方法。设置最终端口的通知消息
-            options.setWill(topic, "close".getBytes(), 0, false);
-
             //设置回调
             mqtt_client.setCallback(new MqttCallback/*Extended*/() {
                /*@Override
@@ -153,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void messageArrived(String topic, MqttMessage message) throws Exception {
                     //subscribe后得到的消息会执行到这里面
-//                    makeToast(message.toString());
+                    makeToast(message.toString());
 
                 }
             });
@@ -176,17 +172,17 @@ public class MainActivity extends AppCompatActivity {
             }
         } catch (MqttException e) {
             e.printStackTrace();
+            makeToast(e.toString());
         }
     }
 
-    /*订阅*/
+//    /*订阅*/
 //    private void subscribeTopic(){
 //        try{
-//                int[] Qos  = {0};
-//                String[] topic = {mqtt_sub_topic};
-//                mqtt_client.subscribe(topic,Qos);
+//            mqtt_client.subscribe(mqtt_sub_topic,1);
 //        } catch (Exception e){
 //            e.printStackTrace();
+//            makeToast(e.toString());
 //            }
 //    }
 
@@ -196,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
             mqtt_client.disconnect();
         } catch (MqttException e) {
             e.printStackTrace();
+            makeToast(e.toString());
         }
     }
 
