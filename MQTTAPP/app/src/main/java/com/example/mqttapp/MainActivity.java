@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private String serverUri = "tcp://152.136.110.145:1883";    //这里可以填上各种云平台的物联网云平的域名+1883端口号，什么阿里云腾讯云百度云天工物接入都可以，
                                 // 注意：前缀“tcp：//”不可少
     private String userName = "root";                           //然后是你的用户名，阿里云腾讯云百度云天工物接入这些平台你新建设备后就自动生成了
-    private String passWord = "passWord";                      //用户名对应的密码，同样各种云平台都会对应生成密码
+    private String passWord = "Zzj123456";                      //用户名对应的密码，同样各种云平台都会对应生成密码
     private String clientId = "app"+System.currentTimeMillis(); //clientId很重要，不能重复，否则就会连不上，所以我定义成 app+当前时间
     private String mqtt_sub_topic = "test";                     //需要订阅的主题
     //private String mqtt_pub_topic = "test";                   //需要发布的主题
@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         makeToast("clientID:" + clientId);
+        mqtt_init_Connect();
         Connect=(Button)findViewById(R.id.ConnectionButton);
         PubTopic=(EditText)findViewById(R.id.PublishTopicEditText);
         PubMessage=(EditText)findViewById(R.id.PublishMessageEditText);
@@ -86,15 +87,17 @@ public class MainActivity extends AppCompatActivity {
     /*发布按钮触发*/
     public void PublishMessageButtonClick(View v)
     {
-        if(IsConnect)
-        {
+//        if(IsConnect)
+//        {
+            mqtt_init_Connect();
             publishMessage(PubTopic.getText().toString(),PubMessage.getText().toString());
+            disconnect();
             makeToast("PublishMessageButtonClick");
-        }
-        else
-        {
-            makeToast("WithoutConnect");
-        }
+//        }
+//        else
+//        {
+//            makeToast("WithoutConnect");
+//        }
     }
 
 //    /*订阅按钮触发*/
