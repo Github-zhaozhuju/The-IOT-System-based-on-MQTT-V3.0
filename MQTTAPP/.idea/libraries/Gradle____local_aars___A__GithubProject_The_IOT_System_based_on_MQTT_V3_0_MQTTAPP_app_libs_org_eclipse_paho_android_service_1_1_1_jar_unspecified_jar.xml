@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Gradle: __local_aars__:A./GithubProject/The-IOT-System-based-on-MQTT-V3.0/MQTTAPP/app/libs/org.eclipse.paho.android.service-1.1.1.jar:unspecified@jar">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/libs/org.eclipse.paho.android.service-1.1.1.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
